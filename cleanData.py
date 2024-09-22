@@ -3,6 +3,7 @@ import csv
 
 ##################################################################################################
 
+# Função de leitura do csv
 def replace_chars_in_csv(input_file, output_file):
     with open(input_file, mode='r', newline='', encoding='utf-8') as infile, \
          open(output_file, mode='w', newline='', encoding='utf-8') as outfile:
@@ -14,15 +15,16 @@ def replace_chars_in_csv(input_file, output_file):
             modified_row = []
             for cell in row:
                 # Check if the cell contains the word "positive"
+                # Verifica se a celula contém a palavra "positive"
                 if "positive" in cell:
-                    modified_row.append(cell)  # Keep the original cell
+                    modified_row.append(cell)  # Mantém a celula original
                 else:
-                    # Replace 'x' with '1' and 'o' with '0'
+                    # Substitui 'x' com '1' e 'o' com '0'
                     modified_row.append(cell.replace('x', '1').replace('o', '0').replace('b', '2'))
             writer.writerow(modified_row)
 
-input_csv = './tic-tac-toe.data'  # Change this to your input file name
-output_csv = './tic-tac-toe-no-classes.data'  # Change this to your desired output file name
+input_csv = './tic-tac-toe.data'  # Nome do dataset original
+output_csv = './tic-tac-toe-no-classes.data'  # Nome do dataset alterado, a ser trabalhado
     
 replace_chars_in_csv(input_csv, output_csv)
 
@@ -42,7 +44,7 @@ def verificar_resultado(linha):
         any([coluna == (0, 0, 0) for coluna in zip(*tabuleiro)]) or  # Colunas
         [tabuleiro[i][i] for i in range(3)] == (0, 0, 0) or  # Diagonal principal
         [tabuleiro[i][2-i] for i in range(3)] == (0, 0, 0)):  # Diagonal secundária
-        return 0  # X perdeu (O ganhou)
+        return 0  # O ganhou
     
 
     # Verificar se "X" ganhou
