@@ -17,12 +17,11 @@ scaler.fit(X_train)
 X_train = scaler.transform(X_train)
 X_test = scaler.transform(X_test)
 
-#qualquer numero maior de vizinhos retorna a predicao somente como 3
-knn = KNeighborsClassifier(n_neighbors=1)
+knn = KNeighborsClassifier(n_neighbors=6)
 knn.fit(X_train, y_train)
 
 y_pred = knn.predict(X_test)
-print(y_pred)
+# print(y_pred)
 
 accuracy = accuracy_score(y_test, y_pred)
 print("Accuracy:", accuracy)
@@ -50,6 +49,4 @@ y_pred = knn.predict([[2,0,1,0,2,1,0,1,1,1],
 [2,0,0,1,1,1,2,0,1,3],
 [2,0,0,1,1,1,2,2,2,3]])
 
-
-
-print(y_pred)
+# print(y_pred)
