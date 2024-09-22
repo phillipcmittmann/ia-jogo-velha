@@ -16,3 +16,6 @@ tree = DecisionTreeClassifier()
 tree.fit(X_train, y_train)
 
 y_pred = tree.predict(X_test)
+
+accuracy = accuracy_score(y_test, y_pred)
+print("Accuracy:", accuracy)
