@@ -3,19 +3,24 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score
 import pandas as pd
 
-data = pd.read_csv('./tic-tac-toe-processed.data', sep=',', header=0)
+def inicia_algoritmo():
+    data = pd.read_csv('./tic-tac-toe-processed.data', sep=',', header=0)
 
-X = data
-y = data['result']
+    X = data
+    y = data['result']
 
-# aumentar tamanho do teste
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30)
+    # aumentar tamanho do teste
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30)
 
-tree = DecisionTreeClassifier()
+    tree = DecisionTreeClassifier()
 
-tree.fit(X_train, y_train)
+    tree.fit(X_train, y_train)
+    
+    return tree
 
-y_pred = tree.predict(X_test)
+def retorna_previsao_tree(tabuleiro):
+    tree = inicia_algoritmo()
 
-accuracy = accuracy_score(y_test, y_pred)
-print("Accuracy:", accuracy)
+    previsao = tree.predict(tabuleiro)
+
+    return previsao
