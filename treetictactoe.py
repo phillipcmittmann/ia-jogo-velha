@@ -28,6 +28,7 @@ def inicia_algoritmo():
 
     # accuracy = accuracy_score(y_test, y_pred)
     # print("Accuracy:", accuracy)
-    
+
+    return tree
 
 inicia_algoritmo()

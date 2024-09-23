@@ -23,12 +23,14 @@ def inicia_algoritmo():
     mlp = MLPClassifier(hidden_layer_sizes=(32, 16), max_iter=1000, random_state=42)
     mlp.fit(X_train, np.ravel(y_train))
 
-    y_pred = mlp.predict(X_test)
+    # y_pred = mlp.predict(X_test)
 
-    accuracy = accuracy_score(y_test, y_pred)
-    print("Accuracy:", accuracy)
+    # accuracy = accuracy_score(y_test, y_pred)
+    # print("Accuracy:", accuracy)
 
-    class_report = classification_report(y_test, y_pred)
-    print("Classification Report:\n", class_report)
+    # class_report = classification_report(y_test, y_pred)
+    # print("Classification Report:\n", class_report)
+
+    return mlp
 
 inicia_algoritmo()

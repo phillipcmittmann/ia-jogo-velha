@@ -23,12 +23,14 @@ def inicia_algoritmo():
     knn = KNeighborsClassifier(n_neighbors=10)
     knn.fit(X_train, np.ravel(y_train))
 
-    y_pred = knn.predict(X_test)
+    # y_pred = knn.predict(X_test)
 
     # print(y_pred)
     # print([1,1,1,1,0,0,1,0,0])
 
-    accuracy = accuracy_score(y_test, y_pred)
-    print("Accuracy:", accuracy)
+    # accuracy = accuracy_score(y_test, y_pred)
+    # print("Accuracy:", accuracy)
+
+    return knn
 
 inicia_algoritmo()
