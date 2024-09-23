@@ -3,7 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
 
-def inicia_algoritmo():
+def inicia_algoritmo_knn():
     data = pd.read_csv('./tic-tac-toe-processed.data', sep=',', header=0)
 
     X = data
@@ -22,9 +22,14 @@ def inicia_algoritmo():
 
     return knn
 
-def retorna_previsao_knn(tabuleiro):
-    knn = inicia_algoritmo()
-
-    previsao = knn.predict(tabuleiro)
+def retorna_previsao_knn(tabuleiro, knn):
+    previsao = int(knn.predict(tabuleiro)[0])
     
-    return previsao
+    if (previsao == 0):
+        return 0
+    elif (previsao == 1):
+        return 1
+    elif (previsao == 2):
+        return 2
+    elif (previsao == 3):
+        return 3

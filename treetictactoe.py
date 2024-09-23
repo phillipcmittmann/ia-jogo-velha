@@ -3,7 +3,7 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score
 import pandas as pd
 
-def inicia_algoritmo():
+def inicia_algoritmo_tree():
     data = pd.read_csv('./tic-tac-toe-processed.data', sep=',', header=0)
 
     X = data
@@ -18,9 +18,14 @@ def inicia_algoritmo():
     
     return tree
 
-def retorna_previsao_tree(tabuleiro):
-    tree = inicia_algoritmo()
-
-    previsao = tree.predict(tabuleiro)
-
-    return previsao
+def retorna_previsao_tree(tabuleiro, tree):
+    previsao = int(tree.predict(tabuleiro)[0])
+    
+    if (previsao == 0):
+        return 0
+    elif (previsao == 1):
+        return 1
+    elif (previsao == 2):
+        return 2
+    elif (previsao == 3):
+        return 3

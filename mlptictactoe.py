@@ -3,7 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 import pandas as pd
 
-def inicia_algoritmo():
+def inicia_algoritmo_mlp():
     data = pd.read_csv('./tic-tac-toe-processed.data', sep=',', header=0)
 
     X = data
@@ -21,9 +21,14 @@ def inicia_algoritmo():
 
     return mlp
 
-def retorna_previsao_mlp(tabuleiro):
-    mlp = inicia_algoritmo()
-
-    previsao = mlp.predict(tabuleiro)
-
-    return previsao
+def retorna_previsao_mlp(tabuleiro, mlp):
+    previsao = int(mlp.predict(tabuleiro)[0])
+    
+    if (previsao == 0):
+        return 0
+    elif (previsao == 1):
+        return 1
+    elif (previsao == 2):
+        return 2
+    elif (previsao == 3):
+        return 3
