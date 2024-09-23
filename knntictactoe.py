@@ -12,7 +12,7 @@ def inicia_algoritmo():
     X = X.drop(X.columns[9], axis=1)
     y = y.drop(y.columns[:9], axis=1)
 
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.50)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.70)
 
     scaler = StandardScaler()
     scaler.fit(X_train)
@@ -20,7 +20,7 @@ def inicia_algoritmo():
     X_train = scaler.transform(X_train)
     X_test = scaler.transform(X_test)
 
-    knn = KNeighborsClassifier(n_neighbors=8)
+    knn = KNeighborsClassifier(n_neighbors=10)
     knn.fit(X_train, np.ravel(y_train))
 
     y_pred = knn.predict(X_test)
