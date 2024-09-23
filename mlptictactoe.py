@@ -21,7 +21,7 @@ def inicia_algoritmo():
 
     return mlp
 
-def retorna_previsao_knn(tabuleiro):
+def retorna_previsao_mlp(tabuleiro):
     mlp = inicia_algoritmo()
 
     previsao = mlp.predict(tabuleiro)
