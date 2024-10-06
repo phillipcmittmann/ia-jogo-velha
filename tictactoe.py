@@ -4,6 +4,8 @@ from knntictactoe import inicia_algoritmo as init_knn
 from mlptictactoe import inicia_algoritmo as init_mlp
 from treetictactoe import inicia_algoritmo as init_tree
 import pandas as pd
+from sklearn.model_selection import train_test_split
+
 
 def print_board(board):
     print("\n    1   2   3 \n")
@@ -159,41 +161,6 @@ def escolher_algoritmo():
     elif (escolha == 3):
         # algoritmo arvore
         return 3
-    
-def read_data():
-    X = pd.read_csv('./tic-tac-toe-processed.data', sep=',', header=0)
-    y = pd.read_csv('./tic-tac-toe-processed.data', sep=',', header=0)
-
-    gb_X = X.groupby('result')
-
-    o_ganhou_X = gb_X.get_group(0)
-    o_ganhou_X = o_ganhou_X.drop(o_ganhou_X.columns[9], axis=1)
-
-    x_ganhou_X = gb_X.get_group(1)
-    x_ganhou_X = x_ganhou_X.drop(x_ganhou_X.columns[9], axis=1)
-
-    empate_X = gb_X.get_group(2)
-    empate_X = empate_X.drop(empate_X.columns[9], axis=1)
-
-    tem_jogo_X = gb_X.get_group(3)
-    tem_jogo_X = tem_jogo_X.drop(tem_jogo_X.columns[9], axis=1)
-    print(tem_jogo_X)
-
-
-    gb_y = y.groupby('result')
-
-    o_ganhou_y = gb_y.get_group(0)
-    o_ganhou_y = o_ganhou_y.drop(o_ganhou_y.columns[:9], axis=1)
-
-    x_ganhou_y = gb_y.get_group(1)
-    x_ganhou_y = x_ganhou_y.drop(x_ganhou_y.columns[:9], axis=1)
-
-    empate_y = gb_y.get_group(2)
-    empate_y = empate_y.drop(empate_y.columns[:9], axis=1)
-
-    tem_jogo_y = gb_y.get_group(3)
-    tem_jogo_y = tem_jogo_y.drop(tem_jogo_y.columns[:9], axis=1)
-
 
 # knn = init_knn()
 # mlp = init_mlp()
@@ -202,4 +169,3 @@ def read_data():
 # algoritmo_escolhido = escolher_algoritmo()
 
 # main()
-read_data()

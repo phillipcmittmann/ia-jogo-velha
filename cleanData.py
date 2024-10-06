@@ -1,5 +1,6 @@
 import pandas as pd
 import csv
+from sklearn.model_selection import train_test_split
 
 ##################################################################################################
 
@@ -73,3 +74,45 @@ df['result'] = df.apply(verificar_resultado, axis=1)
 df.to_csv('tic-tac-toe-processed.data', index=False)
 
 print("Última coluna atualizada com os resultados.")
+
+X = pd.read_csv('./tic-tac-toe-processed.data', sep=',', header=0)
+y = pd.read_csv('./tic-tac-toe-processed.data', sep=',', header=0)
+
+gb_X = X.groupby('result')
+
+o_ganhou_X = gb_X.get_group(0)
+o_ganhou_X = o_ganhou_X.drop(o_ganhou_X.columns[9], axis=1)
+
+x_ganhou_X = gb_X.get_group(1)
+x_ganhou_X = x_ganhou_X.drop(x_ganhou_X.columns[9], axis=1)
+
+empate_X = gb_X.get_group(2)
+empate_X = empate_X.drop(empate_X.columns[9], axis=1)
+
+tem_jogo_X = gb_X.get_group(3)
+tem_jogo_X = tem_jogo_X.drop(tem_jogo_X.columns[9], axis=1)
+
+gb_y = y.groupby('result')
+
+o_ganhou_y = gb_y.get_group(0)
+o_ganhou_y = o_ganhou_y.drop(o_ganhou_y.columns[:9], axis=1)
+
+x_ganhou_y = gb_y.get_group(1)
+x_ganhou_y = x_ganhou_y.drop(x_ganhou_y.columns[:9], axis=1)
+
+empate_y = gb_y.get_group(2)
+empate_y = empate_y.drop(empate_y.columns[:9], axis=1)
+
+tem_jogo_y = gb_y.get_group(3)
+tem_jogo_y = tem_jogo_y.drop(tem_jogo_y.columns[:9], axis=1)
+
+o_ganhou_X_train, o_ganhou_X_test, o_ganhou_y_train, o_ganhou_y_test = train_test_split(o_ganhou_X, o_ganhou_y, test_size=0.70)
+x_ganhou_X_train, x_ganhou_X_test, x_ganhou_y_train, x_ganhou_y_test = train_test_split(x_ganhou_X, x_ganhou_y, test_size=0.70)
+empate_X_train, empate_X_test, empate_y_train, empate_y_test = train_test_split(empate_X, empate_y, test_size=0.70)
+tem_jogo_X_train, tem_jogo_X_test, tem_jogo_y_train, tem_jogo_y_test = train_test_split(tem_jogo_X, tem_jogo_y, test_size=0.70)
+
+X_train_concat = pd.concat([o_ganhou_X_train, x_ganhou_X_train, tem_jogo_X_train, empate_X_train])
+y_train_concat = pd.concat([o_ganhou_y_train, x_ganhou_y_train, tem_jogo_y_train, empate_y_train])
+
+X_train_concat.to_csv('./tic-tac-toe-X.data', index=False)
+y_train_concat.to_csv('./tic-tac-toe-y.data', index=False)
