@@ -3,9 +3,8 @@ import numpy
 from knntictactoe import inicia_algoritmo as init_knn
 from mlptictactoe import inicia_algoritmo as init_mlp
 from treetictactoe import inicia_algoritmo as init_tree
-import pandas as pd
-from sklearn.model_selection import train_test_split
 
+##################################################################################################
 
 def print_board(board):
     print("\n    1   2   3 \n")
@@ -15,19 +14,23 @@ def print_board(board):
     print("   ---+---+---")
     print("3   " + board[2][0] + " | " + board[2][1] + " | " + board[2][2] + "\n")
 
+##################################################################################################
 
 def check_row(board, row):
     return (board[row][0] == board[row][1] and board[row][1] == board[row][2] and board[row][0] != " ")
 
+##################################################################################################
 
 def check_column(board, col):
     return (board[0][col] == board[1][col] and board[1][col] == board[2][col] and board[0][col] != " ")
 
+##################################################################################################
 
 def check_diagonals(board):
     return (board[0][0] == board[1][1] and board[1][1] == board[2][2] and board[0][0] != " ") or\
             (board[2][0] == board[1][1] and board[1][1] == board[0][2] and board[2][0] != " ")
 
+##################################################################################################
 
 def check_winner(board):
     for i in range(3):
@@ -39,6 +42,7 @@ def check_winner(board):
         return True
     return False
 
+##################################################################################################
 
 def is_board_full(board):
     for item in board:
@@ -46,28 +50,29 @@ def is_board_full(board):
             return False
     return True
 
+##################################################################################################
 
 def play(board):
     while True:
-        row = input("Enter row number: ")
+        row = input("Digite o número da linha: ")
         while not row.isdigit() or int(row) < 1 or int(row) > 3:
-            row = input("Enter row number between 1-3: ")
+            row = input("Digite o número da linha entre 1-3: ")
 
         row = int(row)
         
-        col = input("Enter column number: ")
+        col = input("Digite o número da coluna: ")
         
         while not col.isdigit() or int(col) < 1 or int(col) > 3:
-            col = input("Enter column number between 1-3: ")
+            col = input("Digite o número da coluna entre 1-3: ")
         
         col = int(col)
         
         if board[row-1][col-1] != " ":
-            print("Pick an empty box!")
+            print("Escolha um quadrado vazio!")
         else:
             return (row-1, col-1)
         
-
+##################################################################################################
 
 def play_random(board):
     possible_moves = []
@@ -79,33 +84,34 @@ def play_random(board):
     
     return possible_moves[random.randrange(len(possible_moves))]
 
+##################################################################################################
 
 def main():
     random.seed()
     
-    # Create an empty board
+    # Cria um campo vazio
     board = [ 
         [" ", " ", " "],
         [" ", " ", " "],
         [" ", " ", " "]
     ]
 
-    # Create 2 players
+    # Cria 2 jogadores
     players = ["X", "O"]
-    # Player X plays first
+    # Jogador X joga primeiro
     turn = 0
 
     while not is_board_full(board):
         print_board(board)
 
         if turn == 0:
-            # User input
-            print("You play!")
+            # Input do usuário
+            print("Você joga!")
             row, col = play(board)
             board[row][col] = players[turn]
         else:
-            # Compuuter plays
-            print("Computer plays!")
+            # Computador joga
+            print("CPU joga!")
             row, col = play_random(board)
             board[row][col] = players[turn]
             
@@ -148,6 +154,7 @@ def main():
         # Select the next player
         turn = 1 - turn
 
+##################################################################################################
 
 def escolher_algoritmo():
     escolha = int(input("Escolha o algoritmo a ser utilizado: 1-KNN, 2-MLP, 3-Árvores: "))
@@ -162,10 +169,12 @@ def escolher_algoritmo():
         # algoritmo arvore
         return 3
 
-# knn = init_knn()
-# mlp = init_mlp()
-# tree = init_tree()
+##################################################################################################
 
-# algoritmo_escolhido = escolher_algoritmo()
+knn = init_knn()
+mlp = init_mlp()
+tree = init_tree()
 
-# main()
+algoritmo_escolhido = escolher_algoritmo()
+
+main()

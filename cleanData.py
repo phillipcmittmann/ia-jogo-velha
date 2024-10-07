@@ -14,16 +14,16 @@ def replace_chars_in_csv(input_file, output_file):
         for row in reader:
             modified_row = []
             for cell in row:
-                # Check if the cell contains the word "positive"
+                # Checa se a celula possui a palavra "positive"
                 if "positive" in cell:
-                    modified_row.append(cell)  # Keep the original cell
+                    modified_row.append(cell)  # Mantem a celula original
                 else:
-                    # Replace 'x' with '1' and 'o' with '0'
+                    # Muda 'x' com '1' e 'o' com '0'
                     modified_row.append(cell.replace('x', '1').replace('o', '0').replace('b', '2'))
             writer.writerow(modified_row)
 
-input_csv = './tic-tac-toe.data'  # Change this to your input file name
-output_csv = './tic-tac-toe-no-classes.data'  # Change this to your desired output file name
+input_csv = './tic-tac-toe.data'  # Arquivo a ser lido
+output_csv = './tic-tac-toe-no-classes.data'  # Nome do arquivo criado
     
 replace_chars_in_csv(input_csv, output_csv)
 
@@ -73,7 +73,7 @@ df['result'] = df.apply(verificar_resultado, axis=1)
 # Salvar o DataFrame atualizado em um novo arquivo
 df.to_csv('tic-tac-toe-processed.data', index=False)
 
-print("Última coluna atualizada com os resultados.")
+##################################################################################################
 
 X = pd.read_csv('./tic-tac-toe-processed.data', sep=',', header=0)
 y = pd.read_csv('./tic-tac-toe-processed.data', sep=',', header=0)
@@ -106,13 +106,21 @@ empate_y = empate_y.drop(empate_y.columns[:9], axis=1)
 tem_jogo_y = gb_y.get_group(3)
 tem_jogo_y = tem_jogo_y.drop(tem_jogo_y.columns[:9], axis=1)
 
-o_ganhou_X_train, o_ganhou_X_test, o_ganhou_y_train, o_ganhou_y_test = train_test_split(o_ganhou_X, o_ganhou_y, test_size=0.70)
-x_ganhou_X_train, x_ganhou_X_test, x_ganhou_y_train, x_ganhou_y_test = train_test_split(x_ganhou_X, x_ganhou_y, test_size=0.70)
-empate_X_train, empate_X_test, empate_y_train, empate_y_test = train_test_split(empate_X, empate_y, test_size=0.70)
-tem_jogo_X_train, tem_jogo_X_test, tem_jogo_y_train, tem_jogo_y_test = train_test_split(tem_jogo_X, tem_jogo_y, test_size=0.70)
+o_ganhou_X_train, o_ganhou_X_test, o_ganhou_y_train, o_ganhou_y_test = train_test_split(o_ganhou_X, o_ganhou_y, test_size=0.30)
+x_ganhou_X_train, x_ganhou_X_test, x_ganhou_y_train, x_ganhou_y_test = train_test_split(x_ganhou_X, x_ganhou_y, test_size=0.30)
+empate_X_train, empate_X_test, empate_y_train, empate_y_test = train_test_split(empate_X, empate_y, test_size=0.30)
+tem_jogo_X_train, tem_jogo_X_test, tem_jogo_y_train, tem_jogo_y_test = train_test_split(tem_jogo_X, tem_jogo_y, test_size=0.30)
 
 X_train_concat = pd.concat([o_ganhou_X_train, x_ganhou_X_train, tem_jogo_X_train, empate_X_train])
 y_train_concat = pd.concat([o_ganhou_y_train, x_ganhou_y_train, tem_jogo_y_train, empate_y_train])
 
-X_train_concat.to_csv('./tic-tac-toe-X.data', index=False)
-y_train_concat.to_csv('./tic-tac-toe-y.data', index=False)
+X_train_concat.to_csv('./tic-tac-toe-X-train.data', index=False)
+y_train_concat.to_csv('./tic-tac-toe-y-train.data', index=False)
+
+X_test_concat = pd.concat([o_ganhou_X_test, x_ganhou_X_test, tem_jogo_X_test, empate_X_test])
+y_test_concat = pd.concat([o_ganhou_y_test, x_ganhou_y_test, tem_jogo_y_test, empate_y_test])
+
+X_test_concat.to_csv('./tic-tac-toe-X-test.data', index=False)
+y_test_concat.to_csv('./tic-tac-toe-y-test.data', index=False)
+
+print("Limpeza dos dados realizada com sucesso.")
